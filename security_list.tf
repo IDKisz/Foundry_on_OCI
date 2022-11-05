@@ -8,15 +8,11 @@ resource "oci_core_security_list" "foundry_security_list" {
         protocol = "6"
         destination_type = "0.0.0.0/0"
         icmp_options {
-            type = null
-            code = null
+            type = 0
+            code = 0
         }
         stateless = true
         tcp_options {
-            destination_port_range {
-            max = 80
-            min = 80
-            }
             source_port_range {
                 max = 80
                 min = 80
@@ -29,15 +25,11 @@ resource "oci_core_security_list" "foundry_security_list" {
         protocol = "6"
         destination_type = "0.0.0.0/0"
         icmp_options {
-            type = null
-            code = null
+            type = 0
+            code = 0
         }
         stateless = true
         tcp_options {
-            destination_port_range {
-            max = 443
-            min = 443
-            }
             source_port_range {
                 max = 443
                 min = 443
@@ -50,15 +42,11 @@ resource "oci_core_security_list" "foundry_security_list" {
         protocol = "6"
         destination_type = "0.0.0.0/0"
         icmp_options {
-            type = null
-            code = null
+            type = 0
+            code = 0
         }
         stateless = true
         tcp_options {
-            destination_port_range {
-            max = 22
-            min = 22
-            }
             source_port_range {
                 max = 22
                 min = 22
@@ -70,8 +58,8 @@ resource "oci_core_security_list" "foundry_security_list" {
         protocol = "6"
         source = "0.0.0.0/0"
         icmp_options {
-            type = null
-            code = null
+            type = 0
+            code = 0
         }
         stateless = true
         tcp_options {
@@ -88,8 +76,8 @@ resource "oci_core_security_list" "foundry_security_list" {
         protocol = "6"
         source = "0.0.0.0/0"
         icmp_options {
-            type = null
-            code = null
+            type = 0
+            code = 0
         }
         stateless = true
         tcp_options {
@@ -106,8 +94,8 @@ resource "oci_core_security_list" "foundry_security_list" {
         protocol = "6"
         source = var.ssh_endpoint
         icmp_options {
-            type = null
-            code = null
+            type = 0
+            code = 0
         }
         stateless = true
         tcp_options {
