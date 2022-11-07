@@ -1,11 +1,11 @@
-resource "oci_core_instance" "free_instance0" {
-  availability_domain = var.tenancy_ocid
+resource "oci_core_instance" "free_instance_foundry" {
+  availability_domain = data.oci_identity_availability_domains.ads.availability_domains[0].name
   compartment_id      = var.tenancy_ocid
   display_name        = "Foundry_VTT"
-  shape               = var.instance_shape
+  shape               = "VM.Standard.A1.Flex"
 
   shape_config {
-    ocpus = var.instance_ocpus
+    ocpus         = var.instance_ocpus
     memory_in_gbs = var.instance_shape_config_memory_in_gbs
   }
 
@@ -13,18 +13,17 @@ resource "oci_core_instance" "free_instance0" {
     subnet_id        = oci_core_subnet.vcn-public-subnet.id
     display_name     = "foundry"
     assign_public_ip = true
-    hostname_label   = "foundry_host"
+    assign_private_dns_record = false
+    # hostname_label   = "foundryhost"
   }
 
   source_details {
-    source_type = "image"
-    source_id   = "ocid1.image.oc1.eu-frankfurt-1.aaaaaaaa7wq4opozz63gwzrolqmalwadtckpke5ehhxh634myjquvwlzetyq"
+    source_type             = "image"
+    source_id               = "ocid1.image.oc1.eu-frankfurt-1.aaaaaaaaoulgsbl2wj2uth7prnsx2dpgdzx4gkergpo77yszyfwqhyyt2qgq"
     boot_volume_size_in_gbs = 60
   }
 
   metadata = {
-    # ssh_authorized_keys = (var.ssh_public_key != "") ? var.ssh_public_key : tls_private_key.compute_ssh_key.public_key_openssh
-    ssh_authorized_keys = var.key_path
-    # "metadata" : { "quake_bot_level" : "Severe", "ssh_authorized_keys" : "ssh-rsa == rsa-key-20160227", "user_data" : "==" }
+    ssh_authorized_keys = var.ssh_instance_key
   }
 }
