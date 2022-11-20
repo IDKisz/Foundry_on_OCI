@@ -43,3 +43,8 @@ variable "instance_shape_config_memory_in_gbs" {
   type = number
   default = 6
 }
+
+variable "alert_rule_recipients" {
+  type = string
+  default = "your@email.com"
+}
